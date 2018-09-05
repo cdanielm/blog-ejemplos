@@ -5,9 +5,9 @@ from collections import defaultdict
 
 r = requests.get("https://es.wikiquote.org/wiki/H%C3%A9ctor_del_Mar")
 
-soup = BeautifulSoup(r.text,"lxml")
+soup = BeautifulSoup(r.text.encode("utf-8"),"lxml")
 
-frases = map(lambda x: x.text.replace("\"",""),soup.select(".mw-parser-output li"))
+frases = map(lambda x: x.text.replace("\"","").encode("utf-8"),soup.select(".mw-parser-output li"))
 
 palabras = map(lambda x: str(x).split(" "),frases)
 
